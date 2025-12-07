@@ -4,7 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class AlarmSystem : MonoBehaviour
 {
-    [SerializeField] private Home _home;
     [SerializeField] private float _repeatRate;
 
     private readonly float _minVolume = 0;
@@ -27,29 +26,23 @@ public class AlarmSystem : MonoBehaviour
         }
     }
 
-    public void OnEnableAlarmSystem() =>
-        _coroutine = StartCoroutine(Include());
+    public void OnEnableAlarmSystem()
+    {
+        StopCoroutine();
+        _coroutine = StartCoroutine(ChangeInclusion(_maxVolume));
+    }
 
-    public void OnDisableAlarmSystem() =>
-        _coroutine = StartCoroutine(TurnItOff());
+    public void OnDisableAlarmSystem()
+    {
+        StopCoroutine();
+        _coroutine = StartCoroutine(ChangeInclusion(_minVolume));
+    }
 
-    private IEnumerator Include()
+    private IEnumerator ChangeInclusion(float targetVolume)
     {
         while (enabled)
         {
-            if (_home.IsEnter)
-                _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, _maxVolume, _repeatRate * Time.deltaTime);
-
-            yield return null;
-        }
-    }
-
-    private IEnumerator TurnItOff()
-    {
-        while (enabled)
-        { 
-            if (_home.IsEnter == false)
-                _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, _minVolume, _repeatRate * Time.deltaTime);
+            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, targetVolume, _repeatRate * Time.deltaTime);
 
             yield return null;
         }
