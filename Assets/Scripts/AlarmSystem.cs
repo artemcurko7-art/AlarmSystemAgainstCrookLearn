@@ -6,7 +6,6 @@ public class AlarmSystem : MonoBehaviour
 {
     [SerializeField] private Home _home;
     [SerializeField] private float _repeatRate;
-    [SerializeField] private float _elapsedTime;
 
     private readonly float _minVolume = 0;
     private readonly float _maxVolume = 1;
@@ -19,18 +18,6 @@ public class AlarmSystem : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
     }
 
-    private void OnEnable()
-    {
-        _home.Entered += OnEnableAlarmSystem;
-        _home.Exited += OnDisableAlarmSystem;
-    }
-
-    private void OnDisable()
-    {
-        _home.Entered -= OnEnableAlarmSystem;
-        _home.Exited -= OnDisableAlarmSystem;
-    }
-
     public void StopCoroutine()
     {
         if (_coroutine != null)
@@ -40,15 +27,11 @@ public class AlarmSystem : MonoBehaviour
         }
     }
 
-    private void OnEnableAlarmSystem()
-    {
+    public void OnEnableAlarmSystem() =>
         _coroutine = StartCoroutine(Include());
-    }
 
-    private void OnDisableAlarmSystem()
-    {
+    public void OnDisableAlarmSystem() =>
         _coroutine = StartCoroutine(TurnItOff());
-    }
 
     private IEnumerator Include()
     {

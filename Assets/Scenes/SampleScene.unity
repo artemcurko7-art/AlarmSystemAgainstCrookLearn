@@ -277,7 +277,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Alarmsystem
   _home: {fileID: 955625998}
   _repeatRate: 0.1
-  _elapsedTime: 0.5
 --- !u!82 &305085534
 AudioSource:
   m_ObjectHideFlags: 0
@@ -956,6 +955,7 @@ GameObject:
   - component: {fileID: 955625997}
   - component: {fileID: 955625996}
   - component: {fileID: 955625998}
+  - component: {fileID: 955625999}
   m_Layer: 0
   m_Name: Home
   m_TagString: Untagged
@@ -1013,6 +1013,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69833d9d3e1e2f46937c377a701ae55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Home
+  _alarmSystem: {fileID: 305085533}
+--- !u!114 &955625999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955625995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 918891ecf9a8fc749a9caad83567f0e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandlerAlarmSystem
+  _home: {fileID: 955625998}
   _alarmSystem: {fileID: 305085533}
 --- !u!1 &1435468388
 GameObject:
